@@ -17,3 +17,9 @@ def add_member(request):
         return redirect('index')  # Redirect to the index page after adding a member
 
     return render(request, 'index.html')
+
+
+def delete_member(request,member_id):
+    member=Member.objects.get(id=member_id)
+    member.delete()
+    return redirect('index')
