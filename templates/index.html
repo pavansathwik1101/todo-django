@@ -10,15 +10,20 @@
 <body>
     <div class="container">
         {% block data %}
-            <h1>USER DATA</h1>
+            <h1>TODO TASKS</h1>
             <ul>
                 {% for p in member %}
-                    <li>{{ p.name }}</li>
+                    <li>{{ p.name }}
+                        <a href="{% url 'delete_member' p.id%}"> 
+                            <button>Delete Task</button>
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
+         
 
         <div id="addMemberForm" >
-            <h2>Add New Member</h2>
+            <h2>Enter A NEW TASK</h2>
             <form method="post" action="{% url 'add_member' %}">
                 {% csrf_token %}
                 <label for="name">Name:</label>
