@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #login-form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #3498db;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #fff;
+            font-size: 16px;
+            display: block;
+            text-align: left;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        p {
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        
+    </style>
+    <style>
+        .messages {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+    
+        .messages li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        /* Styling for different message tags */
+        .messages .error {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+    
+        .messages .success {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+    
+        .messages .info {
+            background-color: #3498db;
+            color: #fff;
+        }
+    
+        .messages .warning {
+            background-color: #f39c12;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>Login</h2>
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+   {% endif %}
+    <div id="login-form">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+    </div>
+</body>
+</html>

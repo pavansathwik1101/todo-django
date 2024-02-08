@@ -7,32 +7,75 @@
     <title>TODO TASKS</title>
     <link rel="stylesheet" type="text/css" href='{%static "styles.css"%}'>
 </head>
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .greeting {
+        color: #333;
+        font-size: 24px;
+        margin: 0;
+    }
+
+    .logout-container {
+        margin-left: auto;
+    }
+
+    .logout-button {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+        background-color: #c0392b;
+    }
+
+</style>
 <body>
     <div class="container">
+        <div class="header">
+            <h1 class="greeting">Hello, {{ data.user.username }}!</h1>
+            <div class="logout-container">
+                <a href="{% url 'logout' %}">
+                    <button class="logout-button">Logout</button>
+                </a>
+            </div>
+        </div>
+
         {% block data %}
-            <h1>TODO TASKS</h1>
+        <div id="addMemberForm">
+                <h2>Enter A NEW TASK</h2>
+                <form method="post" action="{% url 'add_task' %}">
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" required>
+                    <br>
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+            <h1>CURRENT TASKS</h1>
             <ul>
-                {% for p in member %}
-                    <li>{{ p.name }}
-                        <a href="{% url 'delete_member' p.id%}"> 
+                {% for p in data.tasks %}
+                    <li>{{ p.title }}
+                        <a href="{% url 'delete_task' p.id%}"> 
                             <button>Delete Task</button>
                         </a>
                     </li>
                 {% endfor %}
             </ul>
-         
 
-        <div id="addMemberForm" >
-            <h2>Enter A NEW TASK</h2>
-            <form method="post" action="{% url 'add_member' %}">
-                {% csrf_token %}
-                <label for="name">Name:</label>
-                <input type="text" name="name" required>
-                <br>
-                <button type="submit">Add Task</button>
-            </form>
-        </div>
-    {% endblock %}
-</div>
+            
+        {% endblock %}
+    </div>
 </body>
 </html>

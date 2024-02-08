@@ -1,4 +1,4 @@
-/* styles.css */
+/* Updated styles.css */
 
 body {
     font-family: 'Arial', sans-serif;
@@ -16,11 +16,36 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: #333;
-    text-align: center;
-    font-size: 24px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.greeting {
+    color: #333;
+    font-size: 24px;
+    margin: 0;
+}
+
+.logout-container {
+    margin-left: auto;
+}
+
+.logout-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c0392b;
 }
 
 ul {
@@ -39,7 +64,6 @@ li {
     align-items: center;
 }
 
-/* Add hover effect to list items */
 li:hover {
     background-color: #ffeb3b;
     cursor: pointer;
